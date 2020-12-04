@@ -3,9 +3,12 @@
 <%@page import="java.sql.*" %>
 <% 
 request.setCharacterEncoding("UTF-8");
-String pizza_code = request.getParameter("pizza_code");
-String pizza_name = request.getParameter("pizza_name");
-int cost = Integer.parseInt(request.getParameter("cost"));
+
+String sale_code = request.getParameter("sale_code");
+String scode_name = request.getParameter("scode");
+String sale_date = request.getParameter("sale_date");
+String pcode = request.getParameter("pcode");
+int sale_amount = Integer.parseInt(request.getParameter("sale_amount"));
 
 
 try {
@@ -15,11 +18,11 @@ try {
 
 	Statement stmt = conn.createStatement();
 	
-	String query = "INSERT INTO TBL_PIZZA_01(PCODE, PNAME, COST) VALUES('%s', '%s', '%d')";
+	String query = "INSERT INTO TBL_SALELIST_01(SALENO, SCODE, SALEDATE, PCODE, AMOUNT) VALUES('%s', '%s', '%s', '%s', '%d')";
 	
 	/* out.println(String.format(query, pizza_code, pizza_name, cost)); */
 	
-	ResultSet rs = stmt.executeQuery(String.format(query, pizza_code, pizza_name, cost));
+	ResultSet rs = stmt.executeQuery(String.format(query, sale_code, scode_name, sale_date, pcode, sale_amount));
 
 	conn.commit();
 	
