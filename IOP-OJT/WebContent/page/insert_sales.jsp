@@ -13,6 +13,26 @@ try {
 	Statement stmt = conn.createStatement();
 %>
 <script>
+function submit_form() {
+	let form = document.input_form;
+	if(form.sale_code.value === "") {
+		alert("판매 코드를 입력해야 합니다. ")
+		form.sale_code.focus();
+		return false;
+	};
+	if(form.sale_date.value === "") {
+		alert("판매 일자를 입력해야 합니다. ")
+		form.sale_date.focus();
+		return false;
+	};
+	if(form.sale_amount.value === "") {
+		alert("판매 개수를 입력해야 합니다. ")
+		form.sale_amount.focus();
+		return false;
+	};
+	alert("정상적으로 처리되었습니다.");
+	form.submit();
+}
 function reset_form() {
 	document.input_form.reset();
 }
@@ -32,7 +52,7 @@ function reset_form() {
 						Statement stmt_shop = conn.createStatement();
 						ResultSet rs_shop = stmt.executeQuery("SELECT SCODE, SNAME FROM TBL_SHOP_01");
 						while (rs_shop.next()) { %>
-							<option value="<%= rs_shop.getString(1) %>"><%= rs_shop.getString(2) %></option>	
+							<option value="<%= rs_shop.getString(1) %>">["<%= rs_shop.getString(1) %>] <%= rs_shop.getString(2) %></option>	
 					<%
 						}
 					%>
@@ -51,7 +71,7 @@ function reset_form() {
 						Statement stmt_pizza = conn.createStatement();
 						ResultSet rs_pizza = stmt.executeQuery("SELECT PCODE, PNAME FROM TBL_PIZZA_01");
 						while (rs_pizza.next()) { %>
-							<option value="<%= rs_pizza.getString(1) %>"><%= rs_pizza.getString(2) %></option>	
+							<option value="<%= rs_pizza.getString(1) %>">[<%= rs_pizza.getString(1) %>] <%= rs_pizza.getString(2) %></option>	
 					<%
 						}
 					%>
@@ -64,7 +84,7 @@ function reset_form() {
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input type="submit" value="등록하기"/>
+				<input type="button" value="등록하기" onclick="submit_form()"/>
 				<input type="button" value="다시쓰기" onclick="reset_form()"/>
 			</td>
 		</tr>
