@@ -35,7 +35,6 @@
 			    "SALELIST.PCODE = PIZZA.PCODE " +
 			    "ORDER BY SALELIST.SALENO";
 		ResultSet rs = stmt.executeQuery(query);
-		out.println(query);
 		while (rs.next()) {
 			%>
 				<tr>

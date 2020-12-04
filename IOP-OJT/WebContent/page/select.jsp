@@ -21,12 +21,6 @@
 		Class.forName("oracle.jdbc.OracleDriver");
 		Connection conn = DriverManager.getConnection
 		("jdbc:oracle:thin:@//122.128.169.32:1521/xe", "sdh_7", "1234");
-		if (conn != null) {
-			System.out.println("Database Connected!");
-		}
-		else {
-			System.out.println("Database Connect Fail!");
-		}
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT PCODE, PNAME, COST FROM TBL_PIZZA_01");
 		while (rs.next()) {
